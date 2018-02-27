@@ -1,7 +1,9 @@
+//Initializing Strict Mode
+'use strict';
 
 //Initializing Variables
-var max = 400;
-var min = 200;
+var maxSpeed = 400;
+var minSpeed = 200;
 var modal = document.getElementById("wModal");
 
 
@@ -10,7 +12,7 @@ var Enemy = function(x,y) {
     this.sprite = 'images/enemy-bug.png';
     this.x = x;
     this.y = y;
-    this.speed = Math.floor(Math.random() *(max-min + 1) + min);
+    this.speed = Math.floor(Math.random() *(maxSpeed-minSpeed + 1) + minSpeed);
 };
 
 //Constantly updates the enemies position
@@ -39,13 +41,10 @@ var Player = function (x,y) {
 // game to see if player has won or
 // ran into an enemy.
 Player.prototype.update = function() {
-  if (this.y < 0){
-    modal.classList.add('show');
-    this.reset();
-    }
-  else if (this.y > 0) {
+  if (this.y > 0) {
     for (var i = 0; i < allEnemies.length; i++) {
-      if ((this.y == allEnemies[i].y) && (this.x < allEnemies[i].x + 101) && (this.x + 101 > allEnemies[i].x)) {
+      if ((this.y == allEnemies[i].y) && (this.x < allEnemies[i].x + 50) && (this.x + 50 > allEnemies[i].x)) {
+        alert('you got hit');
         this.reset();
       }
     }
@@ -71,30 +70,30 @@ Player.prototype.handleInput = function(click) {
   case 'up':
   if (this.y > -50) {
     this.y -= 90;
-    player = new Player(this.x,this.y);
   };
 
   break;
   case 'down':
   if (this.y < 400) {
     this.y += 90;
-    player = new Player(this.x,this.y);
   };
 
   break;
   case 'left':
   if (this.x > 0) {
     this.x -= 100;
-    player = new Player(this.x,this.y);
   };
 
   break;
   case 'right':
   if (this.x != 400) {;
     this.x += 100;
-    player = new Player(this.x,this.y);
     };
   };
+  if (this.y < 0){
+    modal.classList.add('show');
+    this.reset();
+  }
 };
 
 //Creates enemies and places them into an array
