@@ -6,7 +6,6 @@ var maxSpeed = 400;
 var minSpeed = 200;
 var modal = document.getElementById("wModal");
 
-
 // Enemies our player must avoid
 var Enemy = function(x,y) {
     this.sprite = 'images/enemy-bug.png';
